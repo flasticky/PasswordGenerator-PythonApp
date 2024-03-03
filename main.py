@@ -44,7 +44,10 @@ while True:
     if minLength >= 5 and minLength <= 100:
         break
     else:
-        print("Your password is too long or too short.")
+        if minLength < 5:
+            print("Your password is too short.")
+        else:
+            print("Your password is too long.")
 
 if minLength < 10:
     print("WARNING - Your password is too short. Please consider a longer password for better security.\n")
