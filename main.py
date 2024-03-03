@@ -6,6 +6,33 @@ def generatePassword(minLength, numbers=True, specialCharacters=True):
     digits = string.digits
     special = string.punctuation
     
-    print(letters, digits, special)
+    characters = letters
+    if numbers:
+        characters += digits
+    if specialCharacters:
+        characters += special
+        
+    secret = ""
+    meetsCriteria = False
+    containsNumber = False
+    containsSpecial = False
     
-generatePassword(10)
+    while not meetsCriteria or len(secret) < minLength:
+        newChar = random.choice(characters)
+        secret += newChar
+        
+        if newChar in digits:
+            containsNumber = True
+        elif newChar in special:
+            containsSpecial = True
+            
+        meetsCriteria = True
+        if numbers:
+            meetsCriteria = containsNumber
+        if special:
+            meetsCriteria = meetsCriteria and containsSpecial
+    
+    return secret
+    
+secret = generatePassword(10)
+print(secret)
