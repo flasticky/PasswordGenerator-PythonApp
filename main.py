@@ -39,49 +39,53 @@ def generatePassword(minLength, numbers=True, specialCharacters=True):
     
     return secret
 
-while True:
-    while True:   
-        minLength = int(input("Enter the length (min. length 5, max. length 100): "))
-        if minLength >= 5 and minLength <= 100:
-            break
-        else:
-            if minLength < 5:
-                print("Your password is too short.")
-            else:
-                print("Your password is too long.")
-
-    if minLength < 10:
-        print("WARNING - Your password is too short. Please consider a longer password for better security.\n")
-
+try:
     while True:
-        containsNumber = input("Do you want to include numbers (y/n)? ").lower()
-        if containsNumber == "y" or containsNumber == "n":
-            break
-        else:
-            print("Please enter 'y' for yes or 'n' for no.")
-
-    while True:
-        containsSpecial = input("Do you want to include special characters (y/n)? ").lower()
-        if containsSpecial == "y" or containsSpecial == "n":
-            break
-        else:
-            print("Please enter 'y' for yes or 'n' for no.")
-            
-    while True:
-        try:
-            numberOfPasswords = int(input("How many passwords do you want to generate (min. 1, max. 100)? "))
-            if numberOfPasswords >= 1 and numberOfPasswords <= 100:
+        while True:   
+            minLength = int(input("Enter the length (min. length 5, max. length 100): "))
+            if minLength >= 5 and minLength <= 100:
                 break
             else:
-                print("Please enter a valid number (min. 0, max. 100)")
-        except ValueError:
-            print("Please enter a valid number (min. 0, max. 100)")
+                if minLength < 5:
+                    print("Your password is too short.")
+                else:
+                    print("Your password is too long.")
 
-    if numberOfPasswords == 1:
-        print("\nGenerated password:")
-    else:
-        print("\nGenerated passwords:")
-    for _ in range(numberOfPasswords):
-        secret = generatePassword(minLength, containsNumber == "y", containsSpecial == "y")
-        print(secret)
-    print()
+        if minLength < 10:
+            print("WARNING - Your password is too short. Please consider a longer password for better security.\n")
+
+        while True:
+            containsNumber = input("Do you want to include numbers (y/n)? ").lower()
+            if containsNumber == "y" or containsNumber == "n":
+                break
+            else:
+                print("Please enter 'y' for yes or 'n' for no.")
+
+        while True:
+            containsSpecial = input("Do you want to include special characters (y/n)? ").lower()
+            if containsSpecial == "y" or containsSpecial == "n":
+                break
+            else:
+                print("Please enter 'y' for yes or 'n' for no.")
+                
+        while True:
+            try:
+                numberOfPasswords = int(input("How many passwords do you want to generate (min. 1, max. 100)? "))
+                if numberOfPasswords >= 1 and numberOfPasswords <= 100:
+                    break
+                else:
+                    print("Please enter a valid number (min. 0, max. 100)")
+            except ValueError:
+                print("Please enter a valid number (min. 0, max. 100)")
+
+        if numberOfPasswords == 1:
+            print("\nGenerated password:")
+        else:
+            print("\nGenerated passwords:")
+        for _ in range(numberOfPasswords):
+            secret = generatePassword(minLength, containsNumber == "y", containsSpecial == "y")
+            print(secret)
+        print()
+
+except KeyboardInterrupt:
+    print("\nProgram terminated.")
