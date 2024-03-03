@@ -17,15 +17,20 @@ def generatePassword(minLength, numbers=True, specialCharacters=True):
     containsNumber = False
     containsSpecial = False
     
-    while not meetsCriteria or len(secret) < minLength:
-        newChar = random.choice(characters)
-        secret += newChar
+    while len(secret) < minLength or not meetsCriteria:
+        secret = ""
+        containsNumber = False
+        containsSpecial = False
         
-        if newChar in digits:
-            containsNumber = True
-        elif newChar in special:
-            containsSpecial = True
+        for _ in range(minLength):
+            newChar = random.choice(characters)
+            secret += newChar
             
+            if newChar in digits:
+                containsNumber = True
+            elif newChar in special:
+                containsSpecial = True
+        
         meetsCriteria = True
         if numbers:
             meetsCriteria = containsNumber
