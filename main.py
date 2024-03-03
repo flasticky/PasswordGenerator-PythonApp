@@ -29,10 +29,15 @@ def generatePassword(minLength, numbers=True, specialCharacters=True):
         meetsCriteria = True
         if numbers:
             meetsCriteria = containsNumber
-        if special:
+        if specialCharacters:
             meetsCriteria = meetsCriteria and containsSpecial
     
     return secret
     
-secret = generatePassword(10)
-print(secret)
+minLength = int(input("Enter the length: "))
+if minLength < 10:
+    print("WARNING - Your password is too short. Please choose a longer password for better security.")
+containsNumber = input("Do you want to include numbers (y/n)? ").lower() == "y"
+containsSpecial = input("Do you want to include special characters (y/n)? ").lower() == "y"
+secret = generatePassword(minLength, containsNumber, containsSpecial)
+print("The generated password is:", secret)
