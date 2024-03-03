@@ -66,6 +66,22 @@ while True:
             break
         else:
             print("Please enter 'y' for yes or 'n' for no.")
+            
+    while True:
+        try:
+            numberOfPasswords = int(input("How many passwords do you want to generate (min. 1, max. 100)? "))
+            if numberOfPasswords >= 1 and numberOfPasswords <= 100:
+                break
+            else:
+                print("Please enter a valid number (min. 0, max. 100)")
+        except ValueError:
+            print("Please enter a valid number (min. 0, max. 100)")
 
-    secret = generatePassword(minLength, containsNumber == "y", containsSpecial == "y")
-    print("The generated password is:", secret, "\n")
+    if numberOfPasswords == 1:
+        print("\nGenerated password:")
+    else:
+        print("\nGenerated passwords:")
+    for _ in range(numberOfPasswords):
+        secret = generatePassword(minLength, containsNumber == "y", containsSpecial == "y")
+        print(secret)
+    print()
